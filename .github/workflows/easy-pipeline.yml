@@ -1,6 +1,6 @@
 name: Easy Pipeline
 
-on: [push, pull_request]
+on: push
 
 jobs:
   golang-linter:
