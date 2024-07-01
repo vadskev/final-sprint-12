@@ -3,7 +3,7 @@ name: Easy Pipeline
 on: [pull_request]
 
 jobs:
-  golangci:
+  golang-linter:
     name: Step 1. Linter tests
     runs-on: ubuntu-22.04
     container: golang:1.22.1
@@ -16,7 +16,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v4
         with:
-          version: v1.54
+          version: v1.54.2
   test:
     name: Step 2. Go vet tests
     runs-on: ubuntu-22.04
@@ -29,6 +29,7 @@ jobs:
       - name: Run Unit Tests
         run: GOOS=linux GOARCH=amd64 go test
   coverage:
+    needs: [golang-linter, test]
     name: Step 3. Coverage reports
     runs-on: ubuntu-22.04
     container: golang:1.22.1
