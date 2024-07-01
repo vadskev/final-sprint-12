@@ -52,10 +52,8 @@ jobs:
           
   deploy:
     needs: [golang-linter, test]
-    name: Step 4. Push Docker image to Docker Hub
+    name: Step 4. Push Docker image to Docker Hub ${{ github.ref }}
     runs-on: ubuntu-22.04
-    run: echo "${{ github.ref }}"
-
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout
