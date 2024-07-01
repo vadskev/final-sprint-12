@@ -6,6 +6,7 @@ jobs:
   golangci:
     name: Step 1. Linter tests
     runs-on: ubuntu-22.04
+    container: golang:1.22.1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -19,7 +20,7 @@ jobs:
   test:
     name: Step 2. Go vet tests
     runs-on: ubuntu-22.04
-    container: golang:1.21.1
+    container: golang:1.22.1
     steps:
       - uses: actions/checkout@v4
       - name: Vet tests
@@ -30,6 +31,7 @@ jobs:
   coverage:
     name: Step 3. Coverage reports
     runs-on: ubuntu-22.04
+    container: golang:1.22.1
     steps:
       - uses: actions/checkout@v4
         with:
