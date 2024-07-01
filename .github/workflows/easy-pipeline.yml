@@ -1,6 +1,6 @@
 name: Easy Pipeline
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   golang-linter:
@@ -51,10 +51,10 @@ jobs:
           slug: vadskev/final-sprint-12
           
   deploy:
-    needs: [golang-linter, test]
+    needs: coverage
     name: Step 4. Push Docker image to Docker Hub
     runs-on: ubuntu-22.04
-    #if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
